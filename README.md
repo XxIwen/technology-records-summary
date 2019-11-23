@@ -1,5 +1,5 @@
-# Git 命令总结
-#### 一、常用
+# Git Summary
+#### 一、常用命令
 - 添加一个远程仓库 （先有本地库，后有远程库的时候，如何关联远程库）
   ```
   git remote add origin git@server-name:path/repo-name.git // 关联一个远程库
@@ -72,21 +72,29 @@
   ```
   git rebase // rebase操作可以把本地未push的分叉提交历史整理成直线
   ```
-#### 二、创建本地分支并与远程库分支对应、关联
-```
-git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
-git fetch --all
-git pull --all
-```
 - Fetch all branches from all remotes
   ```
   git fetch --all
   ```
-#### 三、如何永久性地移除远程分支的commit
-```
-git reset --hard // first step
-git push --force // last step
-```
+
+#### FAQ
+- **1. 在GIT中创建一个空分支**
+  ```
+  git checkout --orphan doc // First step, 该命令会创建一个名为doc的分支，并且该分支下有前一个分支下的所有文件,新的分支不会指向任何以前的提交，就是它没有历史，如果你提交当前内容，那么这次提交就是这个分支的首次提交.
+  git rm -rf  // Second step.
+  git commit -am "new branch for documentation" // Last step
+  ```
+- **2. 如何永久性地移除远程分支的commit**
+  ```
+  git reset --hard // first step
+  git push --force // last step
+  ```
+- **3. 何如创建所有与远程库分支对应、关联的本地分支**
+  ```
+  git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
+  git fetch --all
+  git pull --all
+  ```
 
 ###### 参阅文献：
 - [https://www.liaoxuefeng.com/wiki/896043488029600](https://www.liaoxuefeng.com/wiki/896043488029600)
