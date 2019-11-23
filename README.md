@@ -82,8 +82,13 @@ git pull --all
   ```
   git fetch --all
   ```
-
+#### 三、如何永久性地移除远程分支的commit
+```
+git reset --hard // first step
+git push --force // last step
+```
 
 ###### 参阅文献：
 - [https://www.liaoxuefeng.com/wiki/896043488029600](https://www.liaoxuefeng.com/wiki/896043488029600)
 - [https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud](https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud)
+- [How to fetch all Git branches](https://stackoverflow.com/questions/10312521/how-to-fetch-all-git-branches)
