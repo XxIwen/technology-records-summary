@@ -81,7 +81,7 @@
 - **1. 在GIT中创建一个空分支**
   ```
   git checkout --orphan doc // First step, 该命令会创建一个名为doc的分支，并且该分支下有前一个分支下的所有文件,新的分支不会指向任何以前的提交，就是它没有历史，如果你提交当前内容，那么这次提交就是这个分支的首次提交.
-  git rm -rf  // Second step.
+  git rm -rf  // Second step, 删除所有内容 .
   git commit -am "new branch for documentation" // Last step
   ```
 - **2. 如何永久性地移除远程分支的commit**
