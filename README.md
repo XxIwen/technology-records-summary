@@ -19,6 +19,13 @@
   git branch -d issue-101
   ```
 
+- 刪除分支
+  ```
+  git branch -d dev
+  git branch -D dev // 强制删除
+
+  ```
+
 - 在本地创建和远程分支对应的分支
   ```
   git checkout -b dev origin/dev // 创建远程origin的dev分支到本地，用这个命令创建本地dev分支（本地和远程分支的名称最好一致）
