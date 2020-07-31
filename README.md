@@ -178,11 +178,12 @@
   git branch -a // 查看本地仓库和远程仓库的信息
   git branch -r // 查看所有远程库的分支名
   ```
-- [git merge]()
+- [git merge](https://www.liaoxuefeng.com/wiki/896043488029600/900005860592480)
   ```
+  git merge // 不会显示 feature，只保留单条分支记录
+  git merge –no-ff // 可以保存你之前的分支历史。能够更好的查看 merge历史，以及branch 状态。eg： git merge --no-ff -m "merged bug fix 101" dev
   git merge dev
   git merge origin/dev
-  git merge --no-ff -m "merged bug fix 101" dev
   ```
 - [git commit]()
 - [git checkout]()
