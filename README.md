@@ -173,31 +173,63 @@
       ```
       git push origin --tags // git push 的时候不会推送分支，如果一定要推送标签的话那么可以使用这个命令
       ```
-- 创建分支
+- [git branch]()
   ```
-  git checkout -b issue-101
-  git merge --no-ff -m "merged bug fix 101" issue-101
-  git branch -d issue-101
+  git branch -a // 查看本地仓库和远程仓库的信息
+  git branch -r // 查看所有远程库的分支名
   ```
-
-- 刪除分支
+- [git merge]()
+  ```
+  git merge dev
+  git merge origin/dev
+  git merge --no-ff -m "merged bug fix 101" dev
+  ```
+- [git commit]()
+- [git checkout]()
+- [git stash]()
+- [git rebase]()
+---
+#### 小结
+- [Fast forward模式](https://www.liaoxuefeng.com/wiki/896043488029600/900005860592480)
+  - git merge --no-ff 合并分支 (禁用Fast forward)
+    ```
+    // 通常，合并分支时，如果可能，Git会用Fast forward模式，但这种模式下，删除分支后，会丢掉分支信息。
+    // 合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并
+    git checkout -b dev
+    git merge --no-ff -m "merged bug fix 101" dev // 合并分支时， --no-ff参数，表示禁用Fast forward
+    git branch -d dev
+    ```
+- 刪除本地分支
   ```
   git branch -d dev
   git branch -D dev // 强制删除
 
   ```
-
-- 在本地创建和远程分支对应的分支
+- 删除远程分支
   ```
-  git checkout -b dev origin/dev // 创建远程origin的dev分支到本地，用这个命令创建本地dev分支（本地和远程分支的名称最好一致）
+  git push origin ：refs/for/master // 如果省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支
+  git push origin --delete remote_branch_name // 删除远程分支
   ```
-
-- 建立本地分支和远程分支的关联
+- 新建本地分支
+  ```
+  git checkout -b dev // 基于本地分支
+  git branch dev  // 基于本地分支
+  git checkout -b dev origin/dev // 创建远程origin的dev分支到本地（在本地创建和远程分支对应的分支），用这个命令创建本地dev分支（本地和远程分支的名称最好一致）
+  ```
+- 新建远程分支
+  ```
+  git push origin local_branch_name // 在远程仓库origin创建新的分支（相当于将local_branch上传到远程仓库，前提是该远程分支不存在）
+  ```
+- 关联本地分支和远程分支(本地分支已存在)
   ```
   git branch --set-upstream-to=origin/dev dev // 指定本地dev分支与远程origin/dev分支的链接
-  git branch --set-upstream-to origin/newName
+  git branch --set-upstream-to origin/dev // 本地分支与远程分支dev的关联
+  git push -u origin master // 第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
   ```
-
+- 关联本地分支和远程分支(本地分支不存在, 需要新建)
+  ```
+  git checkout -b dev origin/dev // 创建远程origin的dev分支到本地（在本地创建和远程分支对应的分支），用这个命令创建本地dev分支（本地和远程分支的名称最好一致）
+  ```
 - 保存当前没有add的工作记录，并切换分支进行其他工作
   ```
   git stash	
@@ -215,13 +247,6 @@
   ```
   git checkout -- <file> <file>
   ```
-
-- 推送到远程仓库的某个分支
-  ```
-  git push origin master
-  git push -u origin master // 第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
-  ```
-
 - 拉取代码
   ```
   git pull origin master
@@ -272,7 +297,14 @@
   git push origin newName // 2. c. 上传新命名的本地分支
   git branch --set-upstream-to origin/newName 2. d.把修改后的本地分支与远程分支关联
   ```
-- **先有本地库，后有远程库的时候，如何关联远程库**
+- **5. 先有本地库，后有远程库的时候，如何关联远程库**
+  ```
+  git remote add origin git@server-name:path/repo-name.git // 1. 添加一个名为origin的远程仓库（默认为origin，可以修改为其他名字：origin1, origin2或者origin3）
+  // 以下三种，任选一个
+  git branch --set-upstream-to=origin/dev dev // 2. a. 指定本地dev分支与远程origin/dev分支的链接
+  git branch --set-upstream-to origin/dev // 2. b. 本地分支与远程分支dev的关联
+  git push -u origin master // 2. c. 第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
+  ```
 
 ###### 参阅：
 - [Git教程-廖雪峰](https://www.liaoxuefeng.com/wiki/896043488029600)
