@@ -216,6 +216,7 @@
   git checkout -b dev // 基于本地分支
   git branch dev  // 基于本地分支
   git checkout -b dev origin/dev // 创建远程origin的dev分支到本地（在本地创建和远程分支对应的分支），用这个命令创建本地dev分支（本地和远程分支的名称最好一致）
+  git branch fa origin/fa // 表示根据远程仓库的fa分支创建一个本地仓库的fa分支, 创建完成之后不进行切换
   ```
 - 新建远程分支
   ```
@@ -230,6 +231,7 @@
 - 关联本地分支和远程分支(本地分支不存在, 需要新建)
   ```
   git checkout -b dev origin/dev // 创建远程origin的dev分支到本地（在本地创建和远程分支对应的分支），用这个命令创建本地dev分支（本地和远程分支的名称最好一致）
+  git branch fa origin/fa // 表示根据远程仓库的fa分支创建一个本地仓库的fa分支, 创建完成之后不进行切换
   ```
 - 保存当前没有add的工作记录，并切换分支进行其他工作
   ```
