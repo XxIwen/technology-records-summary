@@ -1,5 +1,55 @@
 # Git Summary
 #### 一、常用命令
+- **SSH Key**
+  - ###### [创建SSH Key并添加到 ssh-agent](https://docs.github.com/cn/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+    - 生成新 SSH 密钥并添加到 ssh-agent
+    ```
+    // 打开 Git Bash （使用Linux命令）检查现有 SSH 密钥后，您可以生成新 SSH 密钥以用于身份验证，然后将其添加到 ssh-agent。
+    ---
+    ll ~/.ssh // 在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件；这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人
+    cat ~/.ssh/id_rsa.pub // 读取本机ssh key
+
+    ssh-keygen -t rsa -b 4096 -C "your_email@example.com" // 将创建以所提供的电子邮件地址为标签的新 SSH 密钥
+    ssh-keygen -t rsa -C "your_email@example.com" // from Liao https://www.liaoxuefeng.com/wiki/896043488029600/896954117292416
+    ssh-keygen -t rsa // for Gerrit setting
+    ---
+    $ ssh-keygen -t rsa
+    Generating public/private rsa key pair.
+    Enter file in which to save the key (/c/Users/XXXX/.ssh/id_rsa):
+    Enter passphrase (empty for no passphrase):
+    Enter same passphrase again:
+    Your identification has been saved in /c/Users/XXXX/.ssh/id_rsa.
+    Your public key has been saved in /c/Users/XXXX/.ssh/id_rsa.pub.
+    The key fingerprint is:
+    SHA256:az9jnpXSmKXgJPeOefUFcC4s/4T6N9Sdhv4ftx4DhVI XXXX@DESKTOP-XDFAAAF
+    The key's randomart image is:
+    +---[RSA 3072]----+
+    |             E   |
+    |            o o  |
+    |           o = . |
+    |          . + +  |
+    |      . S  o.+.oo|
+    |       = + *+o+o+|
+    |        + *o==.=.|
+    |       . =*+ .= *|
+    |        o+=+..o=o|
+    +----[SHA256]-----+
+    ---
+    ```
+  - ###### [用SSH Agent 管理 SSH Key](https://docs.github.com/cn/github/authenticating-to-github/working-with-ssh-key-passphrases)
+    ```
+    eval "$(ssh-agent -s)" // 检查你的ssh-agent是否是活跃的
+    ssh-add ~/.ssh/id_rsa // 将私匙添加到id_rsa
+    ssh -T git@github.com // 测试是否能够连接到github.com
+    ---
+    $ ssh -T git@github.com
+    The authenticity of host 'github.com (52.74.223.119)' can't be established.
+    RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+    Are you sure you want to continue connecting (yes/no/[fingerprint])? y
+    Please type 'yes', 'no' or the fingerprint: no
+    Host key verification failed.
+    ---
+    ```
 - [git clone (克隆一个仓库)]()
   ```
   git clone git@github.com:XxIwen/gitskills.git // 从远程库 git@server-name:path/repo-name.git 克隆一个本地仓库
@@ -77,8 +127,52 @@
     git pull origin // 如果当前分支与对应的origin远程分支存在追踪(remote-tracking)关系，git pull就可以省略远程分支名。（表示：本地的当前分支自动与对应的origin远程仓库的“追踪分支”(remote-tracking branch)进行合并）
     git pull // 完全省略表示：本地的当前分支自动与已建立追踪(remote-tracking)关系的对应的远程仓库的“追踪分支”进行合并。
     ```
-- [git push]()
-  - 1
+- [git push](https://git-scm.com/docs/git-push)
+  - git push [--all | --mirror | --tags] [--follow-tags] [--atomic] [-n | --dry-run] [--receive-pack=<git-receive-pack>]
+  - git push的一般形式为 git push [remote name] [local branch] [remote branch]
+    ```
+    // 一个本地库的本地分支可以关联多个远程仓库的远程分支
+    git push // 如果当前分支只有一个远程分支，那么主机名都可以省略；表示：把当前分支推送到已建立关联的远程分支
+    git push origin // 如果当前分支与远程分支存在追踪关系，则本地分支和远程分支都可以省略，将当前分支推送到origin主机的对应分支
+    git push origin master // 如果远程分支被省略, 表示：把本地的分支(比如：master)的最新修改推送至与之存在追踪关系的远程仓库origin的master分支（通常两者同名，如果该远程分支不存在，则会被新建）
+    git push origin ：refs/for/master // 如果省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支，等同于 git push origin --delete master
+    git push -u origin master // 第一次推送master分支时，可以加上参数-u。表示：Git不但会把本地的分支(比如：master)内容推送到远程仓库origin上的master分支，还会把本地的master分支和远程仓库origin的master分支关联起来
+    ```
+  - 常用的git push
+    ```
+    git push
+    git push -u origin master // 关联本地的master分支和远程仓库origin的master分支
+    git push origin local_branch_name // 新建远程分支
+    git push origin --delete remote_branch_name // 删除远程分支
+    ```
+  - git push 新建远程分支
+    ```
+    git push origin local_branch_name // 在远程仓库origin创建新的分支（相当于将local_branch上传到远程仓库，前提是该远程分支不存在）
+    ```
+  - git push 删除远程分支
+    ```
+    git push origin ：refs/for/master // 如果省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支
+    git push origin --delete remote_branch_name // 删除远程分支
+    ```
+  - [扩展用法](https://www.cnblogs.com/qianqiannian/p/6008140.html)
+    - 1.git push -u origin master
+      ```
+      git push -u origin master // 如果当前分支与多个主机存在追踪关系，则可以使用 -u 参数指定一个默认主机，这样后面就可以不加任何参数使用git push
+      // 不带任何参数的git push，默认只推送当前分支，这叫做simple方式，还有一种matching方式，会推送所有有对应的远程分支的本地分支， Git 2.0之前默认使用matching，现在改为simple方式.
+      // 如果想更改设置，可以使用git config命令。git config --global push.default matching OR git config --global push.default simple；可以使用git config -l 查看配置
+      ```
+    - 2.git push --all origin
+      ```
+      git push --all origin // 当遇到这种情况就是不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机，这时需要 -all 选项
+      ```
+    - 3.git push --force origin
+      ```
+      git push --force origin // git push的时候需要本地先git pull更新到跟服务器版本一致，如果本地版本库比远程服务器上的低，那么一般会提示你git pull更新，如果一定要提交，那么可以使用这个命令。
+      ```
+    - 4.git push origin --tags
+      ```
+      git push origin --tags // git push 的时候不会推送分支，如果一定要推送标签的话那么可以使用这个命令
+      ```
 - 创建分支
   ```
   git checkout -b issue-101
@@ -186,3 +280,10 @@
 - [How to fetch all Git branches](https://stackoverflow.com/questions/10312521/how-to-fetch-all-git-branches)
 - [Git Documentation - Chinese](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8)
 - [Git Documentation - English](https://git-scm.com/docs/git-remote)
+- [GitHub Documentation - Chinese](https://docs.github.com/cn/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+---
+# Gerrit Summary
+##### [代码检视工具Gerrit的日常使用](https://www.jianshu.com/p/b77fd16894b6)
+- Gerrit实际上是一个Git服务器，它为在其服务器上托管的Git仓库提供一系列权限控制，但是其主要功能就是用来做Code Review。
+- 关于 refs/for
+  - refs/for 的意义在于我们提交代码到服务器之后是需要经过code review 之后才能进行merge的，而refs/heads 不需要
