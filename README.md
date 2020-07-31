@@ -127,7 +127,7 @@
     - 英文释义
       - Incorporates changes from a remote repository into the current branch. In its default mode, git pull is shorthand for git fetch followed by git merge FETCH_HEAD.
       - More precisely, git pull runs git fetch with the given parameters and calls git merge to merge the retrieved branch heads into the current branch. With --rebase, it runs git rebase instead of git merge.
-  - git pull [remote name][remote branch]:[local branch](完整写法)
+  - git pull [remote name][remote branch]:[local branch] 完整写法
     ```
     git pull origin next:master // 拉取origin远程库的next分支，与本地库的master分支合并
     git pull origin next // 如果远程分支是与当前分支合并，则冒号后面的部分可以省略。（表示：拉取origin/next分支，再与当前分支合并。等同于先做git fetch，再做git merge。）.
