@@ -1,8 +1,13 @@
 # Git Summary
+
 #### 一、常用命令
+
 - **SSH Key**
-  - ###### [创建SSH Key并添加到 ssh-agent](https://docs.github.com/cn/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
+  - ###### [创建 SSH Key 并添加到 ssh-agent](https://docs.github.com/cn/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
     - 生成新 SSH 密钥并添加到 ssh-agent
+
     ```
     // 打开 Git Bash （使用Linux命令）检查现有 SSH 密钥后，您可以生成新 SSH 密钥以用于身份验证，然后将其添加到 ssh-agent。
     ---
@@ -36,7 +41,8 @@
     +----[SHA256]-----+
     ---
     ```
-  - ###### [用SSH Agent 管理 SSH Key](https://docs.github.com/cn/github/authenticating-to-github/working-with-ssh-key-passphrases)
+
+  - ###### [用 SSH Agent 管理 SSH Key](https://docs.github.com/cn/github/authenticating-to-github/working-with-ssh-key-passphrases)
     ```
     eval "$(ssh-agent -s)" // 检查你的ssh-agent是否是活跃的
     ssh-add ~/.ssh/id_rsa // 将私匙添加到id_rsa
@@ -50,6 +56,7 @@
     Host key verification failed.
     ---
     ```
+
 - [git clone (克隆一个仓库)]()
   ```
   git clone git@github.com:XxIwen/gitskills.git // 从远程库 git@server-name:path/repo-name.git 克隆一个本地仓库
@@ -105,7 +112,7 @@
     ```
   - git remote remove
     ```
-    git remote remove <name> // Remove the remote named <name>. 
+    git remote remove <name> // Remove the remote named <name>.
     ```
 - [git fetch](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8)
   - 访问远程仓库，从中拉取所有你还没有的数据。 执行完成后，你将会拥有那个远程仓库中所有分支的引用，可以随时合并或查看
@@ -116,11 +123,11 @@
     ```
     - 必须注意 git fetch 命令*只会将数据下载到你的本地仓库*——**它并不会自动合并或修改你当前的工作。 当准备好时,你必须手动将其合并入你的工作。**
 - [git pull]()
-  - 拉取远程仓库某个分支的更新，再与本地的指定分支合并。（相当于git fetch 和 git merge）
+  - 拉取远程仓库某个分支的更新，再与本地的指定分支合并。（相当于 git fetch 和 git merge）
     - 英文释义
       - Incorporates changes from a remote repository into the current branch. In its default mode, git pull is shorthand for git fetch followed by git merge FETCH_HEAD.
       - More precisely, git pull runs git fetch with the given parameters and calls git merge to merge the retrieved branch heads into the current branch. With --rebase, it runs git rebase instead of git merge.
-  - git pull [remote name] [remote branch]:[local branch] (完整写法)
+  - git pull [remote name][remote branch]:[local branch](完整写法)
     ```
     git pull origin next:master // 拉取origin远程库的next分支，与本地库的master分支合并
     git pull origin next // 如果远程分支是与当前分支合并，则冒号后面的部分可以省略。（表示：拉取origin/next分支，再与当前分支合并。等同于先做git fetch，再做git merge。）.
@@ -128,8 +135,8 @@
     git pull // 完全省略表示：本地的当前分支自动与已建立追踪(remote-tracking)关系的对应的远程仓库的“追踪分支”进行合并。
     ```
 - [git push](https://git-scm.com/docs/git-push)
-  - git push [--all | --mirror | --tags] [--follow-tags] [--atomic] [-n | --dry-run] [--receive-pack=<git-receive-pack>]
-  - git push的一般形式为 git push [remote name] [local branch] [remote branch]
+  - git push [--all | --mirror | --tags][--follow-tags] [--atomic][-n | --dry-run] [--receive-pack=<git-receive-pack>]
+  - git push 的一般形式为 git push [remote name][local branch] [remote branch]
     ```
     // 一个本地库的本地分支可以关联多个远程仓库的远程分支
     git push // 如果当前分支只有一个远程分支，那么主机名都可以省略；表示：把当前分支推送到已建立关联的远程分支
@@ -138,7 +145,7 @@
     git push origin ：refs/for/master // 如果省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支，等同于 git push origin --delete master
     git push -u origin master // 第一次推送master分支时，可以加上参数-u。表示：Git不但会把本地的分支(比如：master)内容推送到远程仓库origin上的master分支，还会把本地的master分支和远程仓库origin的master分支关联起来
     ```
-  - 常用的git push
+  - 常用的 git push
     ```
     git push
     git push -u origin master // 关联本地的master分支和远程仓库origin的master分支
@@ -177,6 +184,22 @@
   ```
   git branch -a // 查看本地仓库和远程仓库的信息
   git branch -r // 查看所有远程库的分支名
+  git branch -v // 查看所有的本地分支信息
+    ---
+    ivh-gui-1.0.0               e2a8588 feat(md): add the content of ivh-gui-1.0.0 tech stack description
+    ivh-gui-4.1.18              0754069 feat(md file): add md file IVH_VERSION_4.1.18.md
+    ivh-gui-demo-ant-design-pro 5b29324 feat(all-project): initialize all project by using antdesign pro stack
+    * ivh-gui-map                 e2a8588 feat(md): add the content of ivh-gui-1.0.0 tech stack description
+    master                      d0d0322 feat(git-ignore): update .gitignore file about branch ivh-gui-demo-ant-design-pro
+    ---
+  git branch -vv // 查看所有的本地分支和相关联的远程分支信息
+    ---
+    ivh-gui-1.0.0               e2a8588 [origin/ivh-gui-1.0.0] feat(md): add the content of ivh-gui-1.0.0 tech stack description
+    ivh-gui-4.1.18              0754069 [origin/ivh-gui-4.1.18] feat(md file): add md file IVH_VERSION_4.1.18.md
+    ivh-gui-demo-ant-design-pro 5b29324 [origin/ivh-gui-demo-ant-design-pro] feat(all-project): initialize all project by using antdesign pro stack
+    * ivh-gui-map                 e2a8588 [origin/ivh-gui-map] feat(md): add the content of ivh-gui-1.0.0 tech stack description
+    master                      d0d0322 [origin/master] feat(git-ignore): update .gitignore file about branch ivh-gui-demo-ant-design-pro
+    ---
   ```
 - [git merge](https://www.liaoxuefeng.com/wiki/896043488029600/900005860592480)
   ```
@@ -189,10 +212,13 @@
 - [git checkout]()
 - [git stash]()
 - [git rebase]()
+
 ---
+
 #### 小结
-- [Fast forward模式](https://www.liaoxuefeng.com/wiki/896043488029600/900005860592480)
-  - git merge --no-ff 合并分支 (禁用Fast forward)
+
+- [Fast forward 模式](https://www.liaoxuefeng.com/wiki/896043488029600/900005860592480)
+  - git merge --no-ff 合并分支 (禁用 Fast forward)
     ```
     // 通常，合并分支时，如果可能，Git会用Fast forward模式，但这种模式下，删除分支后，会丢掉分支信息。
     // 合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并
@@ -201,11 +227,13 @@
     git branch -d dev
     ```
 - 刪除本地分支
+
   ```
   git branch -d dev
   git branch -D dev // 强制删除
 
   ```
+
 - 删除远程分支
   ```
   git push origin ：refs/for/master // 如果省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支
@@ -233,14 +261,16 @@
   git checkout -b dev origin/dev // 创建远程origin的dev分支到本地（在本地创建和远程分支对应的分支），用这个命令创建本地dev分支（本地和远程分支的名称最好一致）
   git branch fa origin/fa // 表示根据远程仓库的fa分支创建一个本地仓库的fa分支, 创建完成之后不进行切换
   ```
-- 保存当前没有add的工作记录，并切换分支进行其他工作
+- 保存当前没有 add 的工作记录，并切换分支进行其他工作
+
   ```
-  git stash	
+  git stash
   git stash list
   git stash pop
   ```
 
 - 合并单个提交
+
   ```
   git cherry-pick <commit> // 在master分支上修复的bug，想要合并到当前dev分支，可以用git cherry-pick <commit>命令，把bug提交的修改“复制”到当前分支，避免重复劳动
   eg: git cherry-pick 4c805e2
@@ -251,6 +281,7 @@
   git checkout -- <file> <file>
   ```
 - 拉取代码
+
   ```
   git pull origin master
   ```
@@ -259,13 +290,14 @@
   ```
   git merge --no-ff -m "merge with no-ff" dev // 合并dev分支，请注意--no-ff参数，表示禁用Fast forward，因为本次合并要创建一个新的commit，所以加上-m参数，把commit描述写进去
   ```
-- 查看logs
+- 查看 logs
+
   ```
   git log --graph --pretty=oneline --abbrev-commit
   git reflog
   ```
 
-- 使Git的提交历史变成一条干净的直线
+- 使 Git 的提交历史变成一条干净的直线
   ```
   git rebase // rebase操作可以把本地未push的分叉提交历史整理成直线
   ```
@@ -275,13 +307,14 @@
   ```
 
 #### FAQ
-- **1. 在GIT中创建一个空分支**
+
+- **1. 在 GIT 中创建一个空分支**
   ```
   git checkout --orphan doc // First step, 该命令会创建一个名为doc的分支，并且该分支下有前一个分支下的所有文件,新的分支不会指向任何以前的提交，就是它没有历史，如果你提交当前内容，那么这次提交就是这个分支的首次提交.
   git rm -rf  // Second step, 删除所有内容 .
   git commit -am "new branch for documentation" // Last step
   ```
-- **2. 如何永久性地移除远程分支的commit**
+- **2. 如何永久性地移除远程分支的 commit**
   ```
   git reset --hard // first step
   git push --force // last step
@@ -292,7 +325,7 @@
   git fetch --all
   git pull --all
   ```
-- **4. 重命名本地和远程Branch，并关联**
+- **4. 重命名本地和远程 Branch，并关联**
   ```
   git branch -m oldName newName // 1. 本地分支重命名(未推送到远程)
   git branch -m oldName newName // 2. a. 远程分支重命名 (已经推送远程-假设本地分支和远程对应分支名称相同)
@@ -310,15 +343,20 @@
   ```
 
 ###### 参阅：
-- [Git教程-廖雪峰](https://www.liaoxuefeng.com/wiki/896043488029600)
+
+- [Git 教程-廖雪峰](https://www.liaoxuefeng.com/wiki/896043488029600)
 - [Learn Git with Bitbucket Cloud](https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud)
 - [How to fetch all Git branches](https://stackoverflow.com/questions/10312521/how-to-fetch-all-git-branches)
 - [Git Documentation - Chinese](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8)
 - [Git Documentation - English](https://git-scm.com/docs/git-remote)
 - [GitHub Documentation - Chinese](https://docs.github.com/cn/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
 ---
+
 # Gerrit Summary
-##### [代码检视工具Gerrit的日常使用](https://www.jianshu.com/p/b77fd16894b6)
-- Gerrit实际上是一个Git服务器，它为在其服务器上托管的Git仓库提供一系列权限控制，但是其主要功能就是用来做Code Review。
+
+##### [代码检视工具 Gerrit 的日常使用](https://www.jianshu.com/p/b77fd16894b6)
+
+- Gerrit 实际上是一个 Git 服务器，它为在其服务器上托管的 Git 仓库提供一系列权限控制，但是其主要功能就是用来做 Code Review。
 - 关于 refs/for
-  - refs/for 的意义在于我们提交代码到服务器之后是需要经过code review 之后才能进行merge的，而refs/heads 不需要
+  - refs/for 的意义在于我们提交代码到服务器之后是需要经过 code review 之后才能进行 merge 的，而 refs/heads 不需要
