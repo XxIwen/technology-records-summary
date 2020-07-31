@@ -102,8 +102,16 @@
   git fetch --all
   git pull --all
   ```
+- **4. 重命名本地和远程Branch，并关联**
+  ```
+  git branch -m oldName newName // 1. 本地分支重命名(未推送到远程)
+  git branch -m oldName newName // 2. a. 远程分支重命名 (已经推送远程-假设本地分支和远程对应分支名称相同)
+  git push --delete origin oldName // 2. b. 删除远程分支
+  git push origin newName // 2. c. 上传新命名的本地分支
+  git branch --set-upstream-to origin/newName 2. d.把修改后的本地分支与远程分支关联
+  ```
 
-###### 参阅文献：
+###### 参阅：
 - [https://www.liaoxuefeng.com/wiki/896043488029600](https://www.liaoxuefeng.com/wiki/896043488029600)
 - [https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud](https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud)
 - [How to fetch all Git branches](https://stackoverflow.com/questions/10312521/how-to-fetch-all-git-branches)
