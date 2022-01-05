@@ -6,7 +6,7 @@
 
   - ###### [创建 SSH Key 并添加到 ssh-agent](https://docs.github.com/cn/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
-    - 生成新 SSH 密钥并添加到 ssh-agent
+    - 生成新 SSH 密钥并添加到 ssh-agent (OLD)
 
     ```
     // 打开 Git Bash （使用Linux命令）检查现有 SSH 密钥后，您可以生成新 SSH 密钥以用于身份验证，然后将其添加到 ssh-agent。
@@ -40,6 +40,10 @@
     |        o+=+..o=o|
     +----[SHA256]-----+
     ---
+    ```
+    - 生成新 SSH 密钥并添加到 ssh-agent (NEW)
+    ```
+    ssh-keygen -t ed25519 -C "your_email@example.com"
     ```
 
   - ###### [用 SSH Agent 管理 SSH Key](https://docs.github.com/cn/github/authenticating-to-github/working-with-ssh-key-passphrases)
