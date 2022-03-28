@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Event Loop</title>
+  </head>
+
+  <body>
+    <textarea id="log" rows="20" cols="40"></textarea>
+    <input id="inp" />
+    <script type="text/javascript">
+      const l = document.getElementById('log');
+      const i = document.getElementById('inp');
+      // i.onblur = function () {
+      //   l.value += 'blur\n';
+      // };
+      i.onfocus = function () {
+        l.value += 'focus\n';
+      };
+      setTimeout(function () {
+        l.value += 'log in\n';
+        // l.focus();
+        i.focus();
+        l.value += 'log out\n';
+      }, 100);
+      // i.focus();
+
+      const s = Date.now();
+
+      l.value += '1\n';
+      // 在本轮事件循环之后，下次事件循环之前，才会将时间定时器的事件消息添加到宏任务的消息队列
+      setTimeout(() => {
+        l.value += '2 - setTimeout\n';
+        Promise.resolve().then(() => {
+          l.value += 'then - 5\n';
+        });
+      }, 2500);
+      new Promise((resolve, reject) => {
+        l.value += 'new Promise - 1\n';
+        // 在本轮事件循环之后，下次事件循环之前，才会将时间定时器的事件消息添加到宏任务的消息队列
+        // 下次事件循环开始执行，从宏任务的消息队列中执行一个宏任务的消息回调函数
+        // 该回调函数打印"Promise setTimeout"，并将Promise resolve的消息加入微任务的消息队列
+        setTimeout(() => {
+          l.value += 'Promise setTimeout\n';
+          resolve();
+        }, 2000);
+      })
+        .then(() => {
+          // 执行一个宏任务的消息回调函数后，check微任务的消息队列，如果有消息，那么出队，执行回调函数，然后继续check微任务的消息队列
+          // 如此循环直至微任务的消息队列为空
+          l.value += 'then - 1\n';
+        })
+        .then(() => {
+          l.value += 'then - 2\n';
+        });
+
+      new Promise((resolve, reject) => {
+        l.value += 'new Promise - 2\n';
+        resolve(); // 在本次执行栈空闲后，执行本轮事件循环之前，将Promise resolve后的消息添加到微任务的消息队列
+      })
+        .then(() => {
+          // 在本轮事件循环中，从最先进入微任务消息队列中的消息开始处理队列中的消息。被处理的消息会被移出队列，并作为输入参数来调用与之关联的函数
+          // 该回调函数被放入执行栈执行后，将一个Promise resolve的消息添加到微任务的消息队列；此时执行栈空闲，微任务的消息队列被添加进了新的Promise resolve消息
+          // 继续check微任务的消息队列，如果还有微任务的消息，那么继续执行回调，如此循环直至，本轮事件循环中，微任务的消息队列为空
+          l.value += 'then - 3\n';
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              l.value += 'then setTimeout - 1\n';
+              resolve();
+            }, 0);
+          });
+        })
+        .then(() => {
+          l.value += 'then - 4\n';
+        });
+
+      l.value += '3\n';
+
+      while (true) {
+        if (Date.now() - s >= 3000) {
+          l.value += 'Good, looped for 3000 ms\n';
+          break;
+        }
+      }
+    </script>
+  </body>
+</html>
