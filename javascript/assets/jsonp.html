@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>JSONP 实例</title>
+  </head>
+  <body>
+    <div id="divCustomers"></div>
+    <script type="text/javascript">
+      (function (window, document) {
+        // implement function to create jsonp
+        const jsonp = function (url, data, callback) {
+          let dataString = url.indexOf("?") == -1 ? "?" : "&";
+          if (!!data) {
+            for (let key in data) {
+              dataString += key + "=" + data[key] + "&";
+            }
+          }
+
+          // const funcName = 'my_json_cb_' + Math.random().toString().replace('.', '');
+          // url += dataString + 'callback=' + funcName;
+          const funcName = "callbackFunction";
+          url += dataString + "jsoncallback=" + funcName;
+
+          const scriptEl = document.createElement("script");
+          scriptEl.src = url;
+          window[funcName] = function (data) {
+            callback(data);
+            document.body.removeChild(scriptEl);
+          };
+          document.body.appendChild(scriptEl);
+        };
+
+        window.$jsonp = jsonp;
+      })(window, document);
+    </script>
+    <script type="text/javascript">
+      (function (window, document) {
+        function callbackFunction(result, methodName) {
+          var html = "<ul>";
+          for (var i = 0; i < result.length; i++) {
+            html += "<li>" + result[i] + "</li>";
+          }
+          html += "</ul>";
+          document.getElementById("divCustomers").innerHTML = html;
+        }
+
+        // invoke function
+        const url = "https://www.runoob.com/try/ajax/jsonp.php";
+        window.$jsonp(url, null, callbackFunction);
+      })(window, document);
+    </script>
+  </body>
+</html>
