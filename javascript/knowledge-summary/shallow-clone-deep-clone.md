@@ -783,3 +783,7 @@ console.log(target === result);
 result.func1();
 result.func2(1, 2);
 ```
+### 参阅
+- [你真的掌握变量和类型了吗（一）](http://www.conardli.top/blog/article/JS%E8%BF%9B%E9%98%B6/%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%8E%8C%E6%8F%A1%E5%8F%98%E9%87%8F%E5%92%8C%E7%B1%BB%E5%9E%8B%E4%BA%86%E5%90%97%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html)
+- [你真的掌握变量和类型了吗（二）](http://www.conardli.top/blog/article/JS%E8%BF%9B%E9%98%B6/%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%8E%8C%E6%8F%A1%E5%8F%98%E9%87%8F%E5%92%8C%E7%B1%BB%E5%9E%8B%E4%BA%86%E5%90%97%EF%BC%88%E4%BA%8C%EF%BC%89%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html)
+- [如何写出一个惊艳面试官的深拷贝](http://www.conardli.top/blog/article/JS%E8%BF%9B%E9%98%B6/%E5%A6%82%E4%BD%95%E5%86%99%E5%87%BA%E4%B8%80%E4%B8%AA%E6%83%8A%E8%89%B3%E9%9D%A2%E8%AF%95%E5%AE%98%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D.html#%E5%9F%BA%E7%A1%80%E7%89%88%E6%9C%AC)
