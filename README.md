@@ -26,12 +26,13 @@
 - [模拟实现 Promise](https://github.com/xavier-9527/technology-record-summary/blob/master/javascript/handwriting-js/promise.md)
 - [EventEmitter](https://github.com/xavier-9527/technology-record-summary/blob/master/javascript/handwriting-js/event-emitter.md)
 - [手写深拷贝](https://github.com/xavier-9527/technology-record-summary/blob/master/javascript/handwriting-js/deep-clone.md)
+- 手写 new 操作符
 
 #### 1.2 知识小结
 
 - [ES5 实现继承的六种方式](https://github.com/xavier-9527/technology-record-summary/blob/master/javascript/knowledge-summary/inherit.md)
 - [变量提升和函数提升](https://github.com/xavier-9527/technology-record-summary/blob/master/javascript/knowledge-summary/variable-function-hoisting.md)
-- [JavaScript的事件循环](https://github.com/xavier-9527/technology-record-summary/blob/master/javascript/knowledge-summary/variable-function-hoisting.md)
+- [JavaScript 的事件循环](https://github.com/xavier-9527/technology-record-summary/blob/master/javascript/knowledge-summary/variable-function-hoisting.md)
 - [浅拷贝和深拷贝](https://github.com/xavier-9527/technology-record-summary/blob/master/javascript/knowledge-summary/shallow-clone-deep-clone.md)
 
 ---
