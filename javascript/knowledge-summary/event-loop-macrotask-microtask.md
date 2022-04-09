@@ -386,6 +386,7 @@ while (true) {
 
 - [面试官：说说对 Nodejs 中的事件循环机制理解?](https://vue3js.cn/interview/NodeJS/event_loop.html)
 - [面试官：说说你对浏览器事件循环的理解](https://github.com/febobo/web-interview/issues/73)
+- [【THE LAST TIME】彻底吃透 JavaScript 执行机制](https://mp.weixin.qq.com/s/nQgsEQorv00fr4XqU764bA)
 - [事件循环-MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop)
 - [从event loop规范探究javaScript异步及浏览器更新渲染时机](https://github.com/aooy/blog/issues/5)
 - [Event loop 及 macrotask & microtask](https://zhuanlan.zhihu.com/p/76131519)
