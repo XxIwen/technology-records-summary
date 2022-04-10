@@ -35,12 +35,18 @@
 - [JavaScript 的事件循环](https://github.com/xavier-9527/technology-record-summary/blob/master/javascript/knowledge-summary/variable-function-hoisting.md)
 - [浅拷贝和深拷贝](https://github.com/xavier-9527/technology-record-summary/blob/master/javascript/knowledge-summary/shallow-clone-deep-clone.md)
 
----
-
 ### CI-CD
-#### 1 Docker容器
-- [安装Docker容器](https://github.com/xavier-9527/technology-record-summary/blob/master/ci-cd/docker-installation.md)
-- [Docker容器总结](https://github.com/xavier-9527/technology-record-summary/blob/master/ci-cd/docker-summary.md)
+
+#### 1 Docker 容器
+
+- [安装 Docker 容器](https://github.com/xavier-9527/technology-record-summary/blob/master/ci-cd/docker-installation.md)
+- [Docker 容器总结](https://github.com/xavier-9527/technology-record-summary/blob/master/ci-cd/docker-summary.md)
+
+### Machine Learning
+
+- [Introduction to Machine Learning](https://github.com/xavier-9527/technology-record-summary/blob/master/machine-learning/introduction.md)
+
+---
 
 #### [\* GIT 总结](https://github.com/xavier-9527/technology-records-summary/tree/git-summary)
 
