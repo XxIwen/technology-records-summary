@@ -115,13 +115,13 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
 
 ### then 方法异步调用
 
-如下面的代码：输入顺序是：`1、2、ConardLi`
+如下面的代码：输入顺序是：`1、2、Test`
 
 ```js
 console.log(1);
 
 let promise = new Promise((resolve, reject) => {
-  resolve("ConardLi");
+  resolve("Test");
 });
 
 promise.then((value) => {

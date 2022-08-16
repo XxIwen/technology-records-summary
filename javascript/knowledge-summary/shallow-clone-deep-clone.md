@@ -77,7 +77,7 @@ function clone(target) {
 const target = {
   field1: 1,
   field2: undefined,
-  field3: "ConardLi",
+  field3: "Test",
   field4: {
     child: "child",
     child2: {
@@ -445,11 +445,11 @@ function clone(target, map = new WeakMap()) {
 // 测试用例
 // const map = new Map();
 // map.set("key", "value");
-// map.set("ConardLi", "code秘密花园");
+// map.set("Test", "测试");
 
 // const set = new Set();
-// set.add("ConardLi");
-// set.add("code秘密花园");
+// set.add("Test");
+// set.add("测试");
 
 // const target = {
 //   field1: 1,
@@ -566,11 +566,11 @@ function cloneFunc(target) {
 // 测试用例
 const map = new Map();
 map.set("key", "value");
-map.set("ConardLi", "code秘密花园");
+map.set("Test", "测试");
 
 const set = new Set();
-set.add("ConardLi");
-set.add("code秘密花园");
+set.add("Test");
+set.add("测试");
 
 const target = {
   field1: 1,
@@ -743,11 +743,11 @@ function clone(target, map = new WeakMap()) {
 // 测试用例
 const map = new Map();
 map.set("key", "value");
-map.set("ConardLi", "code秘密花园");
+map.set("Test", "测试");
 
 const set = new Set();
-set.add("ConardLi");
-set.add("code秘密花园");
+set.add("Test");
+set.add("测试");
 
 const target = {
   field1: 1,

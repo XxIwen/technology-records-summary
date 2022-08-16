@@ -172,11 +172,11 @@ function clone(target, map = new WeakMap()) {
 // 测试用例
 const map = new Map();
 map.set('key', 'value');
-map.set('ConardLi', 'code秘密花园');
+map.set('Test', '测试');
 
 const set = new Set();
-set.add('ConardLi');
-set.add('code秘密花园');
+set.add('Test');
+set.add('测试');
 
 const target = {
   field1: 1,
@@ -196,7 +196,7 @@ const target = {
   reg: /\d+/gi,
   error: new Error(),
   func1: () => {
-    console.log('code秘密花园');
+    console.log('测试');
   },
   func2: function (a, b) {
     const sum = a + b;

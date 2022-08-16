@@ -24,13 +24,13 @@ function getUrl(protocol, domain, path) {
   return protocol + "://" + domain + "/" + path;
 }
 
-var page1 = getUrl("http", "www.conardli.top", "page1.html");
-var page2 = getUrl("http", "www.conardli.top", "page2.html");
+var page1 = getUrl("http", "www.google.com", "page1.html");
+var page2 = getUrl("http", "www.google.com", "page2.html");
 ```
 
 使用 currying 来简化它：
 
 ```js
-let conardliSite = currying(simpleURL)("http", "www.conardli.top");
-let page1 = conardliSite("page1.html");
+let site = currying(simpleURL)("http", "www.google.com");
+let page1 = site("page1.html");
 ```
